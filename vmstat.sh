@@ -1,6 +1,6 @@
 #!/bin/bash
 #   This is a shell script which gathers values from vmstat
-#   and appends them to a sqlite3 database to keep a history
+#   and appends them to a sqlite3 database in order to keep a history
 # ---------------------------------------------------------------------------------
 # [root@arch ~]# vmstat -V
 # vmstat from procps-ng 3.3.15
