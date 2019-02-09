@@ -1,4 +1,6 @@
 #!/bin/bash
+# Output preview:  https://i.imgur.com/uRwLDO7.png
+
 clear
 echo
 echo "-------------------------"
@@ -32,3 +34,4 @@ arp -e -n
 
 echo
 echo
+
