@@ -9,14 +9,14 @@ Below we have the action plan for the fix:
 
 # Check the requested buffer values
 systemctl status transmission
-# Stop service
-systemctl stop transmission
 
-# Check existing values
+# Check existing Kernel tuning values
 cat /etc/sysctl.conf
+
 # Check for service individual file
 ls -l /etc/sysctl.d | grep trans
 # -rw-r--r-- 1 root root 56 Feb 10 14:24 transmission.conf
+
 # Check the actual configuration
 # If file is not available, it will be created at next step
 cat /etc/sysctl.d/transmission.conf
@@ -29,7 +29,5 @@ echo 'net.core.rmem_max = 1048576' >> /etc/sysctl.d/transmission.conf
 # Refresh the new Kernel tuning configuration
 sysctl -p
 
-systemctl start transmission
-systemctl status transmission
-
+systemctl reload transmission && systemctl status transmission
 # This fixes the issue
