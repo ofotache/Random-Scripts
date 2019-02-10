@@ -13,18 +13,30 @@ systemctl status transmission
 # Check existing Kernel tuning values
 cat /etc/sysctl.conf
 
-# Check for service individual file
+# Check for service individual file (transmission)
 ls -l /etc/sysctl.d | grep trans
 # -rw-r--r-- 1 root root 56 Feb 10 14:24 transmission.conf
 
 # Check the actual configuration
-# If file is not available, it will be created at next step
+# If file is not available, it will be created at next steps
 cat /etc/sysctl.d/transmission.conf
 
+# We also check the default values of the system
+sysctl -a | grep net.core.rmem_
+sysctl -a | grep net.core.wmem_
+
+# If the default values for max value are too small,
+# we can change them as follows (15MB buffer RX and TX)
+# Example for 10MB
+# 10 * 1024 * 1024 = 10485760 (bytes)
+sysctl -w net.core.rmem_max=15728640
+sysctl -w net.core.wmem_max=15728640
+
+# Now we set the max values for transmission (10MB)
 # Add UDP receive buffer
-echo 'net.core.wmem_max = 4194304' >> /etc/sysctl.d/transmission.conf
+echo 'net.core.wmem_max =10485760' >> /etc/sysctl.d/transmission.conf
 # Add UDP send buffer
-echo 'net.core.rmem_max = 1048576' >> /etc/sysctl.d/transmission.conf
+echo 'net.core.rmem_max =10485760' >> /etc/sysctl.d/transmission.conf
 
 # Refresh the new Kernel tuning configuration
 sysctl -p
