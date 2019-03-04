@@ -1,4 +1,5 @@
 #!/bin/bash
+# Output: https://i.imgur.com/vX82oOT.png
 
 clear
 echo '_______________________'
